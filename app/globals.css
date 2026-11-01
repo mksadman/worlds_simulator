@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+/* Neutral grey surfaces; Worlds 2026 broadcast blue is used only as the accent
+   (active state, primary actions, matches still to pick). Cyan marks hover and small kickers.
+   Dark is the default; <html class="light"> switches to light mode. */
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #1c232d;
+  --line: #2a323d;
+  --text: #e6edf3;
+  --muted: #8b96a5;
+  --plate: #0d1117;
+  --accent: #4d74ff;
+  --accent-2: #22d3ee;
+  --accent-soft: rgba(77, 116, 255, 0.14);
+  --on-accent: #ffffff;
+  --glow: rgba(46, 84, 255, 0.22);
+  --win: #3fb950;
+  --win-soft: rgba(63, 185, 80, 0.12);
+  --loss: #f85149;
+  --loss-soft: rgba(248, 81, 73, 0.11);
+  --hover: rgba(34, 211, 238, 0.12);
+  --hover-ring: #22d3ee;
+  --dim: 0.4;
+  color-scheme: dark;
+}
+
+html.light {
+  --bg: #f4f5f7;
+  --panel: #ffffff;
+  --panel-2: #f0f2f5;
+  --line: #d9dde3;
+  --text: #16191d;
+  --muted: #5d6673;
+  --plate: #1c232d;
+  --accent: #2443e8;
+  --accent-2: #0891b2;
+  --accent-soft: rgba(36, 67, 232, 0.1);
+  --on-accent: #ffffff;
+  --glow: rgba(36, 67, 232, 0.1);
+  --win: #1a7f37;
+  --win-soft: rgba(26, 127, 55, 0.1);
+  --loss: #cf222e;
+  --loss-soft: rgba(207, 34, 46, 0.08);
+  --hover: rgba(8, 145, 178, 0.1);
+  --hover-ring: #0891b2;
+  --dim: 0.6;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-2: var(--accent-2);
+  --color-on-accent: var(--on-accent);
+  --color-win: var(--win);
+  --color-win-soft: var(--win-soft);
+  --color-loss: var(--loss);
+  --color-loss-soft: var(--loss-soft);
+  --color-hover: var(--hover);
+  --color-hover-ring: var(--hover-ring);
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-condensed), "Arial Narrow", ui-sans-serif, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Thin blue-to-cyan strip, after the location bar on the broadcast art. */
+.broadcast-strip {
+  height: 3px;
+  background: linear-gradient(90deg, #1d3bff, #4d74ff 45%, #22d3ee);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
