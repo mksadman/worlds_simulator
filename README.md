@@ -20,9 +20,6 @@ You can pick every winner yourself, let the computer simulate matches using odds
 - [How the odds work](#how-the-odds-work)
   - [The optional LCK/LPL bias](#the-optional-lcklpl-bias)
 - [Project layout](#project-layout)
-- [Changing things](#changing-things)
-- [Tests](#tests)
-- [Deploying to Vercel](#deploying-to-vercel)
 
 ---
 
@@ -241,49 +238,3 @@ screenshots/        Screenshots used in this README
 
 **How a run is stored:** a run is a list of 8 *stages* (Swiss rounds 1–5, then quarterfinals, semifinals and grand final) plus a count of how many are locked. Locking a stage asks the engine to build the next one from the results so far. Undo just lowers the count and drops the stages after it. The run is saved in your browser's `localStorage`, so a refresh keeps it. When it's loaded back, every stage is rebuilt from the saved picks, so broken or outdated saved data can't confuse the engine.
 
----
-
-## Changing things
-
-| I want to… | Change this |
-| --- | --- |
-| Make the LCK/LPL bias bigger or smaller | `LCK_LPL_BONUS` in [lib/config.ts](lib/config.ts) |
-| Change which leagues get the bias | `BONUS_LEAGUES` in [lib/config.ts](lib/config.ts) |
-| Update teams, seeds or points | [data/teams.ts](data/teams.ts) (and the logo map in [data/logos.ts](data/logos.ts) if a tag changes) |
-| Change the colours | The variables at the top of [app/globals.css](app/globals.css) (one block for dark, one for light) |
-
-If you change teams or points, run `npm test`. Some tests check the exact matchups and percentages for the current data, and those expected numbers will need updating too.
-
----
-
-## Tests
-
-```bash
-npm test
-```
-
-The tests cover the rules and the maths, not the visuals:
-
-- **A full pairing fixture.** Given a fixed set of winners, every round's matchups, the final playoff seeds, the final Buchholz values and the quarterfinals must come out exactly as expected.
-- **Round 1 league rule.** No same-league pairs, and the swap order (+1, −1, +2, …) works when a clash is forced.
-- **500 random tournaments.** No same-league pairs in round 1, no rematches in the Swiss stage, teams only ever play teams with the same record, every team plays until it has 3 wins or 3 losses, and exactly 8 qualify.
-- **Odds.** The exact percentages for normal and bias matchups, plus a check that 100,000 simulated TES vs G2 matches (with bias) land between 74% and 76% for TES.
-- **The run itself.** Picking, locking in, undo, keeping user picks when simulating, Simulate Swiss stopping after round 5, and restoring saved runs.
-
-Randomness goes through a small interface, so tests can use a seeded generator and get the same "random" results every time.
-
----
-
-## Deploying to Vercel
-
-The site is fully static, so it deploys with Vercel's default settings:
-
-1. Push the project to a GitHub repository.
-2. In Vercel, choose **Add New → Project** and import the repository.
-3. Leave every setting at its default and click **Deploy**.
-
-No environment variables are needed.
-
----
-
-*Team names and logos belong to their respective organisations. This is an unofficial fan project and isn't affiliated with Riot Games.*
